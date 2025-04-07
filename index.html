@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Simple Login Page</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+        .login-container {
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            width: 300px;
+        }
+        h2 {
+            text-align: center;
+            color: #333;
+        }
+        .input-group {
+            margin-bottom: 15px;
+        }
+        label {
+            display: block;
+            margin-bottom: 5px;
+            color: #555;
+        }
+        input[type="text"],
+        input[type="password"] {
+            width: 100%;
+            padding: 8px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            box-sizing: border-box;
+        }
+        button {
+            width: 100%;
+            padding: 10px;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 16px;
+            margin-bottom: 10px;
+        }
+        #loginBtn {
+            background-color: #4CAF50;
+        }
+        #loginBtn:hover {
+            background-color: #45a049;
+        }
+        #addToCartBtn {
+            background-color: #2196F3;
+        }
+        #addToCartBtn:hover {
+            background-color: #0b7dda;
+        }
+        #orderCompleteBtn {
+            background-color: #ff9800;
+        }
+        #orderCompleteBtn:hover {
+            background-color: #e68a00;
+        }
+        #promotionsBtn {
+            background-color: #9c27b0;
+        }
+        #promotionsBtn:hover {
+            background-color: #7b1fa2;
+        }
+    </style>
+</head>
+<body>
+    <div class="login-container">
+        <h2>Login</h2>
+        <form id="loginForm">
+            <div class="input-group">
+                <label for="username">Username:</label>
+                <input type="text" id="username" name="username" required>
+            </div>
+            <div class="input-group">
+                <label for="password">Password:</label>
+                <input type="password" id="password" name="password" required>
+            </div>
+            <button type="submit" id="loginBtn">Login</button>
+        </form>
+
+        <!-- Additional buttons -->
+        <button id="addToCartBtn">Add to Cart</button>
+        <button id="orderCompleteBtn">Order Complete</button>
+        <button id="promotionsBtn">Promotions and Discounts</button>
+    </div>
+
+    <script>
+        document.getElementById('loginForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            const username = document.getElementById('username').value;
+            const password = document.getElementById('password').value;
+            
+            alert(`Login attempted with:\nUsername: ${username}\nPassword: ${password}\n\nNote: This is a demo. No actual login occurs.`);
+            
+            document.getElementById('username').value = '';
+            document.getElementById('password').value = '';
+        });
+
+        // Add event listeners for the new buttons
+        document.getElementById('addToCartBtn').addEventListener('click', function() {
+            alert('Add to Cart button clicked!\nThis would typically add items to a shopping cart.');
+        });
+
+        document.getElementById('orderCompleteBtn').addEventListener('click', function() {
+            alert('Order Complete button clicked!\nThis would typically finalize an order or update order status.');
+        });
+
+        document.getElementById('promotionsBtn').addEventListener('click', function() {
+            alert('Promotions and Discounts button clicked!\nThis would typically show available promotions and discount codes.');
+        });
+    </script>
+
+    <script>
+    !function(){var i="analytics",analytics=window[i]=window[i]||[];if(!analytics.initialize)if(analytics.invoked)window.console&&console.error&&console.error("Segment snippet included twice.");else{analytics.invoked=!0;analytics.methods=["trackSubmit","trackClick","trackLink","trackForm","pageview","identify","reset","group","track","ready","alias","debug","page","screen","once","off","on","addSourceMiddleware","addIntegrationMiddleware","setAnonymousId","addDestinationMiddleware","register"];analytics.factory=function(e){return function(){if(window[i].initialized)return window[i][e].apply(window[i],arguments);var n=Array.prototype.slice.call(arguments);if(["track","screen","alias","group","page","identify"].indexOf(e)>-1){var c=document.querySelector("link[rel='canonical']");n.push({__t:"bpc",c:c&&c.getAttribute("href")||void 0,p:location.pathname,u:location.href,s:location.search,t:document.title,r:document.referrer})}n.unshift(e);analytics.push(n);return analytics}};for(var n=0;n<analytics.methods.length;n++){var key=analytics.methods[n];analytics[key]=analytics.factory(key)}analytics.load=function(key,n){var t=document.createElement("script");t.type="text/javascript";t.async=!0;t.setAttribute("data-global-segment-analytics-key",i);t.src="https://cdn.segment.com/analytics.js/v1/" + key + "/analytics.min.js";var r=document.getElementsByTagName("script")[0];r.parentNode.insertBefore(t,r);analytics._loadOptions=n};analytics._writeKey="dCHOwjNOqPiHlWL66BZWrcxQsCj9IPdU";;analytics.SNIPPET_VERSION="5.2.0";
+    analytics.load("dCHOwjNOqPiHlWL66BZWrcxQsCj9IPdU");
+    analytics.page();
+    }}();
+  </script>
+</body>
+</html>
