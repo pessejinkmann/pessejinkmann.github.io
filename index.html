@@ -9,7 +9,7 @@
     </script>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Simple Login Page</title>
+    <title>Domino's Pizza Login</title>
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -26,10 +26,19 @@
             border-radius: 8px;
             box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
             width: 300px;
+            text-align: center;
+        }
+        .logo-container {
+            margin-bottom: 20px;
+        }
+        .logo {
+            max-width: 200px;
+            height: auto;
         }
         h2 {
             text-align: center;
             color: #333;
+            margin-top: 0;
         }
         .input-group {
             margin-bottom: 15px;
@@ -58,10 +67,10 @@
             margin-bottom: 10px;
         }
         #loginBtn {
-            background-color: #4CAF50;
+            background-color: #E31837; /* Domino's red color */
         }
         #loginBtn:hover {
-            background-color: #45a049;
+            background-color: #C2162F;
         }
         #addToCartBtn {
             background-color: #2196F3;
@@ -85,7 +94,14 @@
 </head>
 <body>
     <div class="login-container">
-        <h2>Login</h2>
+        <div class="logo-container">
+            <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/3/3e/Domino%27s_pizza_logo.svg/2036px-Domino%27s_pizza_logo.svg.png" 
+                 alt="Domino's Pizza Logo" class="logo" width="50" height="50">
+            <img src="https://static-00.iconduck.com/assets.00/segment-icon-256x237-l86rxwa1.png" 
+                 alt="Domino's Pizza" class="pizza-image" width="50" height="50">
+        </div>
+        <hr class="rounded">
+        <h2>Create/Login</h2>
         <form id="loginForm">
             <div class="input-group">
                 <label for="username">Username:</label>
@@ -97,28 +113,19 @@
             </div>
             <button type="submit" id="loginBtn">Login</button>
         </form>
-
-        <!-- Additional buttons -->
+        <hr class="rounded">
+        <h2>Other Events</h2>
         <button id="addToCartBtn">Add to Cart</button>
-        <button id="orderCompleteBtn">Order Complete</button>
+        <button id="orderCompleteBtn">Order Update/Complete</button>
         <button id="promotionsBtn">Promotions and Discounts</button>
     </div>
 
     <script>
-        // Mock analytics object for demonstration
-        // In a real implementation, this would be your analytics library (Segment, GA, etc.)
-        window.analytics = {
-            track: function(eventName) {
-                console.log("Analytics Event:", eventName);
-                // In a real implementation, this would send to your analytics service
-                alert(`Analytics event sent: "${eventName}"`);
-            }
-        };
-
         // Helper function to send analytics events
         function sendAnalyticsEvent(buttonName) {
             analytics.track(`${buttonName}`, {
-                origin: "Website"
+                origin: "Website",
+                timestamp: new Date().toISOString()
             });
         }
 
