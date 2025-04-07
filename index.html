@@ -67,7 +67,7 @@
             margin-bottom: 10px;
         }
         #loginBtn {
-            background-color: #E31837; /* Domino's red color */
+            background-color: #E31837;
         }
         #loginBtn:hover {
             background-color: #C2162F;
@@ -84,11 +84,34 @@
         #orderCompleteBtn:hover {
             background-color: #e68a00;
         }
-        #promotionsBtn {
+        #customizePizzaBtn {
             background-color: #9c27b0;
         }
-        #promotionsBtn:hover {
+        #customizePizzaBtn:hover {
             background-color: #7b1fa2;
+        }
+        #productViewedBtn {
+            background-color: #4CAF50;
+        }
+        #productViewedBtn:hover {
+            background-color: #3e8e41;
+        }
+        .toppings-group {
+            display: none;
+            margin: 10px 0;
+            padding: 10px;
+            background-color: #f9f9f9;
+            border-radius: 4px;
+            text-align: left;
+        }
+        .toppings-group label {
+            display: flex;
+            align-items: center;
+            margin-bottom: 8px;
+            cursor: pointer;
+        }
+        .toppings-group input[type="checkbox"] {
+            margin-right: 8px;
         }
     </style>
 </head>
@@ -117,15 +140,31 @@
         <h2>Other Events</h2>
         <button id="addToCartBtn">Add to Cart</button>
         <button id="orderCompleteBtn">Order Update/Complete</button>
-        <button id="promotionsBtn">Promotions and Discounts</button>
+        
+        <button id="customizePizzaBtn">Customize Pizza</button>
+        <div class="toppings-group" id="toppingsGroup">
+            <label>
+                <input type="checkbox" name="topping" value="pepperoni"> Pepperoni
+            </label>
+            <label>
+                <input type="checkbox" name="topping" value="mushrooms"> Mushrooms
+            </label>
+            <label>
+                <input type="checkbox" name="topping" value="extra_cheese"> Extra Cheese
+            </label>
+            <button id="saveToppingsBtn" style="width: auto; padding: 5px 10px; font-size: 14px;">Save Toppings</button>
+        </div>
+        
+        <button id="productViewedBtn">Product Viewed</button>
     </div>
 
     <script>
         // Helper function to send analytics events
-        function sendAnalyticsEvent(buttonName) {
+        function sendAnalyticsEvent(buttonName, properties = {}) {
             analytics.track(`${buttonName}`, {
                 origin: "Website",
-                timestamp: new Date().toISOString()
+                timestamp: new Date().toISOString(),
+                ...properties
             });
         }
 
@@ -141,7 +180,7 @@
             document.getElementById('password').value = '';
         });
 
-        // Add event listeners for the new buttons
+        // Add event listeners for the buttons
         document.getElementById('addToCartBtn').addEventListener('click', function() {
             sendAnalyticsEvent('Add to Cart');
             alert('Add to Cart button clicked!\nThis would typically add items to a shopping cart.');
@@ -152,9 +191,30 @@
             alert('Order Complete button clicked!\nThis would typically finalize an order or update order status.');
         });
 
-        document.getElementById('promotionsBtn').addEventListener('click', function() {
-            sendAnalyticsEvent('Promotions and Discounts');
-            alert('Promotions and Discounts button clicked!\nThis would typically show available promotions and discount codes.');
+        // Customize Pizza button with toppings selection
+        document.getElementById('customizePizzaBtn').addEventListener('click', function() {
+            const toppingsGroup = document.getElementById('toppingsGroup');
+            toppingsGroup.style.display = toppingsGroup.style.display === 'block' ? 'none' : 'block';
+        });
+
+        document.getElementById('saveToppingsBtn').addEventListener('click', function() {
+            const selectedToppings = [];
+            document.querySelectorAll('input[name="topping"]:checked').forEach(checkbox => {
+                selectedToppings.push(checkbox.value);
+            });
+            
+            sendAnalyticsEvent('Customize Pizza', {
+                toppings: selectedToppings.join(', '),
+                toppings_count: selectedToppings.length
+            });
+            
+            alert(`Pizza customized with: ${selectedToppings.join(', ') || 'no toppings'}`);
+            document.getElementById('toppingsGroup').style.display = 'none';
+        });
+
+        document.getElementById('productViewedBtn').addEventListener('click', function() {
+            sendAnalyticsEvent('Product Viewed');
+            alert('Product Viewed button clicked!\nThis would typically track when a customer views a product.');
         });
     </script>
 </body>
