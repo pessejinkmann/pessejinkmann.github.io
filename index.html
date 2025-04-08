@@ -221,20 +221,27 @@
             alert('Add to Cart Track event sent!');
         });
 
-        let savedToppings = [];
+        // Add this at the top with other variables if you want to persist toppings between events
+        let selectedToppings = [];
+
         // Customize Pizza button with toppings selection
+        document.getElementById('customizePizzaBtn').addEventListener('click', function() {
+            const toppingsGroup = document.getElementById('toppingsGroup');
+            toppingsGroup.style.display = toppingsGroup.style.display === 'block' ? 'none' : 'block';
+        });
+
         document.getElementById('saveToppingsBtn').addEventListener('click', function() {
-            savedToppings = []; // Reset before saving new ones
+            selectedToppings = [];
             document.querySelectorAll('input[name="topping"]:checked').forEach(checkbox => {
-                savedToppings.push(checkbox.value);
+                selectedToppings.push(checkbox.value);
             });
             
             sendTrackEvent('Customize Pizza', {
-                toppings: savedToppings.join(', '),
-                toppings_count: savedToppings.length
+                toppings: selectedToppings.join(', '),
+                toppings_count: selectedToppings.length
             });
             
-            alert(`Pizza customized with: ${savedToppings.join(', ') || 'no toppings'}`);
+            alert(`Pizza customized with: ${selectedToppings.join(', ') || 'no toppings'}`);
             document.getElementById('toppingsGroup').style.display = 'none';
             alert(`Customize Pizza Track event sent!`);
         });
@@ -242,8 +249,8 @@
         // Update the orderCompleteBtn event listener to include toppings
         document.getElementById('orderCompleteBtn').addEventListener('click', function() {
             sendTrackEvent('Order Complete', {
-                toppings: savedToppings.join(', '),
-                toppings_count: savedToppings.length
+                toppings: selectedToppings.join(', '),
+                toppings_count: selectedToppings.length
             });
             alert('Order Complete Track event sent with toppings!');
         });
