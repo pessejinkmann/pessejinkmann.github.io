@@ -181,7 +181,7 @@
 
         // Helper function to send analytics events
         function sendIdentifyEvent(username, password) {
-            analytics.track(`${simpleUUID}`, {
+            analytics.track(`${simpleUUID()}`, {
                 origin: "Website",
                 timestamp: new Date().toISOString(),
                 username: username,
