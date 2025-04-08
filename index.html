@@ -243,8 +243,13 @@
         // Update the orderCompleteBtn event listener to include toppings
         document.getElementById('orderCompleteBtn').addEventListener('click', function() {
             sendTrackEvent('Order Placed', {
-                toppings: selectedToppings.join(', '),
-                toppings_count: selectedToppings.length
+                products: {
+                    product_id: 123,
+                    product_name: 'Medium Pizza',
+                    toppings: selectedToppings.join(', '),
+                    toppings_count: selectedToppings.length
+                },
+                order_total: 6.99
             });
             alert('Order Placed Track event sent with toppings!');
         });
@@ -252,6 +257,9 @@
         // Add event listeners for the buttons
         document.getElementById('addToCartBtn').addEventListener('click', function() {
             sendTrackEvent('Add to Cart', {
+                product_id: 123,
+                product_name: 'Medium Pizza',
+                product_price: 6.99,
                 toppings: selectedToppings.join(', '),
                 toppings_count: selectedToppings.length
             });
@@ -259,7 +267,10 @@
         });
 
         document.getElementById('productViewedBtn').addEventListener('click', function() {
-            sendTrackEvent('Product Viewed');
+            sendTrackEvent('Product Viewed', {
+                product_id: 123,
+                product_name: 'Medium Pizza'
+            });
             alert('Product Viewed Track event sent!');
         });
     </script>
