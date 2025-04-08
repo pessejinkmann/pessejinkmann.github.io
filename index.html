@@ -193,7 +193,7 @@
                 origin: "Website",
                 timestamp: new Date().toISOString(),
                 email: email,
-                name: name,
+                name: name,     
                 phone: phone,
                 zipcode: zipcode
             });
@@ -213,12 +213,6 @@
             document.getElementById('name').value = '';
             document.getElementById('phone').value = '';
             document.getElementById('zipcode').value = '';
-        });
-
-        // Add event listeners for the buttons
-        document.getElementById('addToCartBtn').addEventListener('click', function() {
-            sendTrackEvent('Add to Cart');
-            alert('Add to Cart Track event sent!');
         });
 
         // Add this at the top with other variables if you want to persist toppings between events
@@ -253,6 +247,15 @@
                 toppings_count: selectedToppings.length
             });
             alert('Order Placed Track event sent with toppings!');
+        });
+
+        // Add event listeners for the buttons
+        document.getElementById('addToCartBtn').addEventListener('click', function() {
+            sendTrackEvent('Add to Cart', {
+                toppings: selectedToppings.join(', '),
+                toppings_count: selectedToppings.length
+            });
+            alert('Add to Cart Track event event sent with toppings!');
         });
 
         document.getElementById('productViewedBtn').addEventListener('click', function() {
