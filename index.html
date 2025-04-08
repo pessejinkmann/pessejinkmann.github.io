@@ -12,7 +12,7 @@
     </script>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Domino's Pizza Login</title>
+    <title>Domino's Pizza Website</title>
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -52,7 +52,9 @@
             color: #555;
         }
         input[type="text"],
-        input[type="password"] {
+        input[type="password"],
+        input[type="email"],
+        input[type="tel"] {
             width: 100%;
             padding: 8px;
             border: 1px solid #ddd;
@@ -127,24 +129,32 @@
                  alt="Domino's Pizza" class="pizza-image" width="50" height="50">
         </div>
         <hr class="rounded">
-        <h2>Create/Login</h2>
+        <h2>Create Account</h2>
         <form id="loginForm">
             <div class="input-group">
-                <label for="username">Username:</label>
-                <input type="text" id="username" name="username" required>
+                <label for="email">Email:</label>
+                <input type="email" id="email" name="email" required>
             </div>
             <div class="input-group">
-                <label for="password">Password:</label>
-                <input type="password" id="password" name="password" required>
+                <label for="name">Name:</label>
+                <input type="text" id="name" name="name" required>
             </div>
-            <button type="submit" id="loginBtn">Login</button>
+            <div class="input-group">
+                <label for="phone">Phone:</label>
+                <input type="tel" id="phone" name="phone" required>
+            </div>
+            <div class="input-group">
+                <label for="zipcode">Zipcode:</label>
+                <input type="text" id="zipcode" name="zipcode" required>
+            </div>
+            <button type="submit" id="loginBtn">Create Account</button>
         </form>
         <hr class="rounded">
-        <h2>Other Events</h2>
-        <button id="addToCartBtn">Add to Cart</button>
-        <button id="orderCompleteBtn">Order Update/Complete</button>
-        
+        <h2>Other Track Events</h2>
+        <button id="productViewedBtn">Product Viewed</button>
         <button id="customizePizzaBtn">Customize Pizza</button>
+        <button id="addToCartBtn">Add to Cart</button>
+        <button id="orderCompleteBtn">Create Order</button>
         <div class="toppings-group" id="toppingsGroup">
             <label>
                 <input type="checkbox" name="topping" value="pepperoni"> Pepperoni
@@ -157,8 +167,6 @@
             </label>
             <button id="saveToppingsBtn" style="width: auto; padding: 5px 10px; font-size: 14px;">Save Toppings</button>
         </div>
-        
-        <button id="productViewedBtn">Product Viewed</button>
     </div>
 
     <script>
@@ -180,25 +188,31 @@
         }
 
         // Helper function to send analytics events
-        function sendIdentifyEvent(username, password) {
+        function sendIdentifyEvent(email, name, phone, zipcode) {
             analytics.track(`${simpleUUID()}`, {
                 origin: "Website",
                 timestamp: new Date().toISOString(),
-                username: username,
-                password: password,
+                email: email,
+                name: name,
+                phone: phone,
+                zipcode: zipcode
             });
         }
 
         document.getElementById('loginForm').addEventListener('submit', function(e) {
             e.preventDefault();
-            const username = document.getElementById('username').value;
-            const password = document.getElementById('password').value;
+            const email = document.getElementById('email').value;
+            const name = document.getElementById('name').value;
+            const phone = document.getElementById('phone').value;
+            const zipcode = document.getElementById('zipcode').value;
             
-            sendIdentifyEvent(username, password);
-            alert(`Login Identify event sent!`);
+            sendIdentifyEvent(email, name, phone, zipcode);
+            alert(`Login Register Identify event sent!`);
             
-            document.getElementById('username').value = '';
-            document.getElementById('password').value = '';
+            document.getElementById('email').value = '';
+            document.getElementById('name').value = '';
+            document.getElementById('phone').value = '';
+            document.getElementById('zipcode').value = '';
         });
 
         // Add event listeners for the buttons
@@ -207,31 +221,31 @@
             alert('Add to Cart Track event sent!');
         });
 
-        document.getElementById('orderCompleteBtn').addEventListener('click', function() {
-            sendTrackEvent('Order Complete');
-            alert('Order Complete Track event sent!');
-        });
-
+        let savedToppings = [];
         // Customize Pizza button with toppings selection
-        document.getElementById('customizePizzaBtn').addEventListener('click', function() {
-            const toppingsGroup = document.getElementById('toppingsGroup');
-            toppingsGroup.style.display = toppingsGroup.style.display === 'block' ? 'none' : 'block';
-        });
-
         document.getElementById('saveToppingsBtn').addEventListener('click', function() {
-            const selectedToppings = [];
+            savedToppings = []; // Reset before saving new ones
             document.querySelectorAll('input[name="topping"]:checked').forEach(checkbox => {
-                selectedToppings.push(checkbox.value);
+                savedToppings.push(checkbox.value);
             });
             
             sendTrackEvent('Customize Pizza', {
-                toppings: selectedToppings.join(', '),
-                toppings_count: selectedToppings.length
+                toppings: savedToppings.join(', '),
+                toppings_count: savedToppings.length
             });
             
-            alert(`Pizza customized with: ${selectedToppings.join(', ') || 'no toppings'}`);
+            alert(`Pizza customized with: ${savedToppings.join(', ') || 'no toppings'}`);
             document.getElementById('toppingsGroup').style.display = 'none';
             alert(`Customize Pizza Track event sent!`);
+        });
+
+        // Update the orderCompleteBtn event listener to include toppings
+        document.getElementById('orderCompleteBtn').addEventListener('click', function() {
+            sendTrackEvent('Order Complete', {
+                toppings: savedToppings.join(', '),
+                toppings_count: savedToppings.length
+            });
+            alert('Order Complete Track event sent with toppings!');
         });
 
         document.getElementById('productViewedBtn').addEventListener('click', function() {
