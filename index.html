@@ -189,7 +189,7 @@
 
         // Helper function to send analytics events
         function sendIdentifyEvent(email, name, phone, zipcode) {
-            analytics.track(`${simpleUUID()}`, {
+            analytics.identify(`${simpleUUID()}`, {
                 origin: "Website",
                 timestamp: new Date().toISOString(),
                 email: email,
@@ -248,11 +248,11 @@
 
         // Update the orderCompleteBtn event listener to include toppings
         document.getElementById('orderCompleteBtn').addEventListener('click', function() {
-            sendTrackEvent('Order Complete', {
+            sendTrackEvent('Order Placed', {
                 toppings: selectedToppings.join(', '),
                 toppings_count: selectedToppings.length
             });
-            alert('Order Complete Track event sent with toppings!');
+            alert('Order Placed Track event sent with toppings!');
         });
 
         document.getElementById('productViewedBtn').addEventListener('click', function() {
