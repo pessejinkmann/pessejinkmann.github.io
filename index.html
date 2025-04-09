@@ -19,9 +19,8 @@
             background-color: #f4f4f4;
             display: flex;
             justify-content: center;
-            align-items: center;
-            height: 100vh;
-            margin: 0;
+            align-items: flex-start;
+            padding: 20px 0;
         }
         .login-container {
             background: white;
@@ -118,15 +117,24 @@
         .toppings-group input[type="checkbox"] {
             margin-right: 8px;
         }
+        .pizza-image-container {
+            margin: 15px 0;
+            display: none;
+        }
+        .pizza-image {
+            max-width: 100%;
+            border-radius: 8px;
+            box-shadow: 0 0 5px rgba(0,0,0,0.2);
+        }
     </style>
 </head>
 <body>
     <div class="login-container">
         <div class="logo-container">
-            <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/3/3e/Domino%27s_pizza_logo.svg/2036px-Domino%27s_pizza_logo.svg.png" 
-                 alt="Domino's Pizza Logo" class="logo" width="50" height="50">
-            <img src="https://static-00.iconduck.com/assets.00/segment-icon-256x237-l86rxwa1.png" 
-                 alt="Domino's Pizza" class="pizza-image" width="50" height="50">
+            <img src="https://www.hatchwise.com/wp-content/uploads/2023/07/image-18.png" 
+                 alt="Domino's Pizza Logo" class="logo" width="130" height="40">
+            <img src="https://images.g2crowd.com/uploads/product/image/large_detail/large_detail_205c43a22cc9f5d110bca0feac5ef444/segment.png" 
+                 alt="Domino's Pizza" class="logo" width="130" height="40">
         </div>
         <hr class="rounded">
         <h2>Create Account</h2>
@@ -152,6 +160,10 @@
         <hr class="rounded">
         <h2>Other Track Events</h2>
         <button id="productViewedBtn">Product Viewed</button>
+        <div class="pizza-image-container" id="pizzaImageContainer">
+            <img src="https://swiftbr.vteximg.com.br/arquivos/618283-PIZZA-ARTESANAL-DE-CALABRESA-SWIFT_3.jpg" 
+                 alt="Cheesy Pepperoni Pizza" class="pizza-image">
+        </div>
         <button id="customizePizzaBtn">Customize Pizza</button>
         <div class="toppings-group" id="toppingsGroup">
             <label>
@@ -163,7 +175,7 @@
             <label>
                 <input type="checkbox" name="topping" value="extra_cheese"> Extra Cheese
             </label>
-            <button id="saveToppingsBtn" style="width: auto; padding: 5px 10px; font-size: 14px;">Save Toppings</button>
+            <button id="saveToppingsBtn" style="background-color: #3e8e41; width: auto; padding: 5px 10px; font-size: 14px;">Save Toppings</button>
         </div>
         <button id="addToCartBtn">Add to Cart</button>
         <button id="orderCompleteBtn">Create Order</button>
@@ -268,6 +280,10 @@
         });
 
         document.getElementById('productViewedBtn').addEventListener('click', function() {
+            // Show the pizza image
+            const pizzaImageContainer = document.getElementById('pizzaImageContainer');
+            pizzaImageContainer.style.display = 'block';
+
             sendTrackEvent('Product Viewed', {
                 product_id: 123,
                 product_name: 'Medium Pizza'
