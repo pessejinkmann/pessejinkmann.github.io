@@ -4,31 +4,31 @@
     <script>
         !function(){var i="analytics",analytics=window[i]=window[i]||[];if(!analytics.initialize)if(analytics.invoked)window.console&&console.error&&console.error("Segment snippet included twice.");else{analytics.invoked=!0;analytics.methods=["trackSubmit","trackClick","trackLink","trackForm","pageview","identify","reset","group","track","ready","alias","debug","page","screen","once","off","on","addSourceMiddleware","addIntegrationMiddleware","setAnonymousId","addDestinationMiddleware","register"];analytics.factory=function(e){return function(){if(window[i].initialized)return window[i][e].apply(window[i],arguments);var n=Array.prototype.slice.call(arguments);if(["track","screen","alias","group","page","identify"].indexOf(e)>-1){var c=document.querySelector("link[rel='canonical']");n.push({__t:"bpc",c:c&&c.getAttribute("href")||void 0,p:location.pathname,u:location.href,s:location.search,t:document.title,r:document.referrer})}n.unshift(e);analytics.push(n);return analytics}};for(var n=0;n<analytics.methods.length;n++){var key=analytics.methods[n];analytics[key]=analytics.factory(key)}analytics.load=function(key,n){var t=document.createElement("script");t.type="text/javascript";t.async=!0;t.setAttribute("data-global-segment-analytics-key",i);t.src="https://cdn.segment.com/analytics.js/v1/" + key + "/analytics.min.js";var r=document.getElementsByTagName("script")[0];r.parentNode.insertBefore(t,r);analytics._loadOptions=n};analytics._writeKey="dCHOwjNOqPiHlWL66BZWrcxQsCj9IPdU";;analytics.SNIPPET_VERSION="5.2.0";
         analytics.load("dCHOwjNOqPiHlWL66BZWrcxQsCj9IPdU");
-        analytics.page();
+        analytics.page("Website","Index");
         }}();
-    </script>
-    <script>
-        analytics.page("Dominos","Home");
     </script>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Domino's Pizza Website</title>
+    <title>Alex's Segment Test Page</title>
     <style>
         body {
             font-family: Arial, sans-serif;
             background-color: #f4f4f4;
             display: flex;
+            flex-direction: column; /* Stack vertically */
             justify-content: center;
-            align-items: flex-start;
+            align-items: center;
             padding: 20px 0;
         }
-        .login-container {
+        .login-container,
+        .track-container {
             background: white;
             padding: 20px;
             border-radius: 8px;
             box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
             width: 300px;
             text-align: center;
+            margin-bottom: 20px; /* spacing between the containers */
         }
         .logo-container {
             margin-bottom: 20px;
@@ -131,8 +131,6 @@
 <body>
     <div class="login-container">
         <div class="logo-container">
-            <img src="https://www.hatchwise.com/wp-content/uploads/2023/07/image-18.png" 
-                 alt="Domino's Pizza Logo" class="logo" width="130" height="40">
             <img src="https://images.g2crowd.com/uploads/product/image/large_detail/large_detail_205c43a22cc9f5d110bca0feac5ef444/segment.png" 
                  alt="Domino's Pizza" class="logo" width="130" height="40">
         </div>
@@ -155,16 +153,24 @@
                 <label for="zipcode">Zipcode:</label>
                 <input type="text" id="zipcode" name="zipcode" required>
             </div>
-            <button type="submit" id="loginBtn">Create Account</button>
+            <div>
+                <div class="input-group">
+                <input type="checkbox" id="newsletter" name="newsletter">
+                    Sign up for newsletter
+                </div>
+            </div>
+            <button type="submit" id="loginBtn">Create Account (Identify)</button>
         </form>
-        <hr class="rounded">
+    </div>
+
+    <div class="track-container">
         <h2>Other Track Events</h2>
-        <button id="productViewedBtn">Product Viewed</button>
+        <button id="productViewedBtn">Product Viewed (Page & Track)</button>
         <div class="pizza-image-container" id="pizzaImageContainer">
             <img src="https://swiftbr.vteximg.com.br/arquivos/618283-PIZZA-ARTESANAL-DE-CALABRESA-SWIFT_3.jpg" 
                  alt="Cheesy Pepperoni Pizza" class="pizza-image">
         </div>
-        <button id="customizePizzaBtn">Customize Pizza</button>
+        <button id="customizePizzaBtn">Customize Pizza (Track)</button>
         <div class="toppings-group" id="toppingsGroup">
             <label>
                 <input type="checkbox" name="topping" value="pepperoni"> Pepperoni
@@ -175,22 +181,21 @@
             <label>
                 <input type="checkbox" name="topping" value="extra_cheese"> Extra Cheese
             </label>
-            <button id="saveToppingsBtn" style="background-color: #3e8e41; width: auto; padding: 5px 10px; font-size: 14px;">Save Toppings</button>
+            <button id="saveToppingsBtn" style="background-color: #3e8e41; width: auto; padding: 5px 10px; font-size: 14px;">Save Toppings (Track)</button>
         </div>
-        <button id="addToCartBtn">Add to Cart</button>
-        <button id="orderCompleteBtn">Create Order</button>
+        <button id="addToCartBtn">Add to Cart (Track)</button>
+        <button id="orderCompleteBtn">Create Order (Track)</button>
     </div>
 
     <script>
         function simpleUUID() {
-        return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function(c) {
-            const r = Math.random() * 16 | 0;
-            const v = c === 'x' ? r : (r & 0x3 | 0x8);
-            return v.toString(16);
-        });
+            return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function(c) {
+                const r = Math.random() * 16 | 0;
+                const v = c === 'x' ? r : (r & 0x3 | 0x8);
+                return v.toString(16);
+            });
         }
 
-        // Helper function to send analytics events
         function sendTrackEvent(buttonName, properties = {}) {
             analytics.track(`${buttonName}`, {
                 origin: "Website",
@@ -199,13 +204,12 @@
             });
         }
 
-        // Helper function to send analytics events
         function sendIdentifyEvent(email, name, phone, zipcode) {
             analytics.identify(`${simpleUUID()}`, {
                 origin: "Website",
                 timestamp: new Date().toISOString(),
                 email: email,
-                name: name,     
+                name: name,
                 phone: phone,
                 zipcode: zipcode
             });
@@ -217,20 +221,18 @@
             const name = document.getElementById('name').value;
             const phone = document.getElementById('phone').value;
             const zipcode = document.getElementById('zipcode').value;
-            
+
             sendIdentifyEvent(email, name, phone, zipcode);
-            alert(`Login Register Identify event sent!`);
-            
+            //alert(`Login Register Identify event sent!`);
+
             document.getElementById('email').value = '';
             document.getElementById('name').value = '';
             document.getElementById('phone').value = '';
             document.getElementById('zipcode').value = '';
         });
 
-        // Add this at the top with other variables if you want to persist toppings between events
         let selectedToppings = [];
 
-        // Customize Pizza button with toppings selection
         document.getElementById('customizePizzaBtn').addEventListener('click', function() {
             const toppingsGroup = document.getElementById('toppingsGroup');
             toppingsGroup.style.display = toppingsGroup.style.display === 'block' ? 'none' : 'block';
@@ -241,18 +243,17 @@
             document.querySelectorAll('input[name="topping"]:checked').forEach(checkbox => {
                 selectedToppings.push(checkbox.value);
             });
-            
+
             sendTrackEvent('Customize Pizza', {
                 toppings: selectedToppings.join(', '),
                 toppings_count: selectedToppings.length
             });
-            
-            alert(`Pizza customized with: ${selectedToppings.join(', ') || 'no toppings'}`);
+
+            //alert(`Pizza customized with: ${selectedToppings.join(', ') || 'no toppings'}`);
             document.getElementById('toppingsGroup').style.display = 'none';
-            alert(`Customize Pizza Track event sent!`);
+            //alert(`Customize Pizza Track event sent!`);
         });
 
-        // Update the orderCompleteBtn event listener to include toppings
         document.getElementById('orderCompleteBtn').addEventListener('click', function() {
             sendTrackEvent('Order Placed', {
                 products: {
@@ -264,10 +265,9 @@
                 },
                 order_total: 6.99
             });
-            alert('Order Placed Track event sent with toppings!');
+            //alert('Order Placed Track event sent with toppings!');
         });
 
-        // Add event listeners for the buttons
         document.getElementById('addToCartBtn').addEventListener('click', function() {
             sendTrackEvent('Add to Cart', {
                 product_id: 123,
@@ -276,20 +276,46 @@
                 toppings: selectedToppings.join(', '),
                 toppings_count: selectedToppings.length
             });
-            alert('Add to Cart Track event event sent with toppings!');
+            //alert('Add to Cart Track event event sent with toppings!');
         });
 
         document.getElementById('productViewedBtn').addEventListener('click', function() {
-            // Show the pizza image
             const pizzaImageContainer = document.getElementById('pizzaImageContainer');
             pizzaImageContainer.style.display = 'block';
-
+            analytics.page('Website','Peperoni Pizza')
             sendTrackEvent('Product Viewed', {
                 product_id: 123,
                 product_name: 'Medium Pizza'
             });
-            alert('Product Viewed Track event sent!');
+            //alert('Product Viewed Track event sent!');
         });
+
+        document.getElementById('loginForm').addEventListener('submit', function(e) {
+        e.preventDefault();
+        const email = document.getElementById('email').value;
+        const name = document.getElementById('name').value;
+        const phone = document.getElementById('phone').value;
+        const zipcode = document.getElementById('zipcode').value;
+        const newsletter = document.getElementById('newsletter').checked;
+
+        sendIdentifyEvent(email, name, phone, zipcode);
+        alert(`Login Register Identify event sent!`);
+
+        if (newsletter) {
+            sendTrackEvent('Newsletter Subscribed', {
+                email: email,
+                timestamp: new Date().toISOString()
+            });
+            alert(`Newsletter Subscribed Track event sent!`);
+        }
+
+        document.getElementById('email').value = '';
+        document.getElementById('name').value = '';
+        document.getElementById('phone').value = '';
+        document.getElementById('zipcode').value = '';
+        document.getElementById('newsletter').checked = false;
+    });
+
     </script>
 </body>
 </html>
