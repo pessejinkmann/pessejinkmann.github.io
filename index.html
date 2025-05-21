@@ -10,6 +10,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Alex's Segment Test Page</title>
+    <link rel="icon" type="image/x-icon" href="/favicon.ico">
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -225,6 +226,14 @@
             sendIdentifyEvent(email, name, phone, zipcode);
             //alert(`Login Register Identify event sent!`);
 
+            if (newsletter) {
+                sendTrackEvent('Newsletter Subscribed', {
+                    email: email,
+                    timestamp: new Date().toISOString()
+                });
+                //alert(`Newsletter Subscribed Track event sent!`);
+            }
+
             document.getElementById('email').value = '';
             document.getElementById('name').value = '';
             document.getElementById('phone').value = '';
@@ -289,32 +298,6 @@
             });
             //alert('Product Viewed Track event sent!');
         });
-
-        document.getElementById('loginForm').addEventListener('submit', function(e) {
-        e.preventDefault();
-        const email = document.getElementById('email').value;
-        const name = document.getElementById('name').value;
-        const phone = document.getElementById('phone').value;
-        const zipcode = document.getElementById('zipcode').value;
-        const newsletter = document.getElementById('newsletter').checked;
-
-        sendIdentifyEvent(email, name, phone, zipcode);
-        alert(`Login Register Identify event sent!`);
-
-        if (newsletter) {
-            sendTrackEvent('Newsletter Subscribed', {
-                email: email,
-                timestamp: new Date().toISOString()
-            });
-            alert(`Newsletter Subscribed Track event sent!`);
-        }
-
-        document.getElementById('email').value = '';
-        document.getElementById('name').value = '';
-        document.getElementById('phone').value = '';
-        document.getElementById('zipcode').value = '';
-        document.getElementById('newsletter').checked = false;
-    });
 
     </script>
 </body>
