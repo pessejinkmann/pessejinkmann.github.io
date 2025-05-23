@@ -169,9 +169,9 @@
         });
         // Add to cart
         document.getElementById('addToCartBtn').addEventListener('click', () => {
-            analytics.page("Add to Cart");
+            analytics.page("Product Added");
             selected.toppings = selected.toppings?.join(', ') ?? ''
-            sendTrack('Add to Cart', { product_id:selected.id, product_name:selected.name, toppings:selected.toppings});
+            sendTrack('Product Added', { product_id:selected.id, product_name:selected.name, toppings:selected.toppings});
             document.getElementById('accountChoice').classList.remove('hidden');
             document.getElementById('customizeBtn').classList.add('hidden');
             document.getElementById('addToCartBtn').classList.add('hidden');
@@ -198,14 +198,15 @@
             const email = document.getElementById('acctEmail').value;
             const name = document.getElementById('acctName')?.value;
             const zip = document.getElementById('acctZip').value;
+            sendTrack("Signed In")
             analytics.identify(simpleId(), { email, name, zipcode:zip, origin:"Website" , timestamp:new Date().toISOString() });
             document.getElementById('accountForm').classList.add('hidden');
             document.getElementById('finishOrderBtn').classList.remove('hidden');
         });
         // Finish order
         document.getElementById('finishOrderBtn').addEventListener('click', () => {
-            analytics.page("Finish Order")
-            sendTrack('Order Placed', { product_id:selected.id, product_name:selected.name, toppings:selected.toppings});
+            analytics.page("Order Completed")
+            sendTrack('Order Completed', { product_id:selected.id, product_name:selected.name, toppings:selected.toppings});
             alert('Order Created!');
         });
         // Reset button
