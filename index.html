@@ -1,35 +1,34 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <script>
-        !function(){var i="analytics",analytics=window[i]=window[i]||[];if(!analytics.initialize)if(analytics.invoked)window.console&&console.error&&console.error("Segment snippet included twice.");else{analytics.invoked=!0;analytics.methods=["trackSubmit","trackClick","trackLink","trackForm","pageview","identify","reset","group","track","ready","alias","debug","page","screen","once","off","on","addSourceMiddleware","addIntegrationMiddleware","setAnonymousId","addDestinationMiddleware","register"];analytics.factory=function(e){return function(){if(window[i].initialized)return window[i][e].apply(window[i],arguments);var n=Array.prototype.slice.call(arguments);if(["track","screen","alias","group","page","identify"].indexOf(e)>-1){var c=document.querySelector("link[rel='canonical']");n.push({__t:"bpc",c:c&&c.getAttribute("href")||void 0,p:location.pathname,u:location.href,s:location.search,t:document.title,r:document.referrer})}n.unshift(e);analytics.push(n);return analytics}};for(var n=0;n<analytics.methods.length;n++){var key=analytics.methods[n];analytics[key]=analytics.factory(key)}analytics.load=function(key,n){var t=document.createElement("script");t.type="text/javascript";t.async=!0;t.setAttribute("data-global-segment-analytics-key",i);t.src="https://cdn.segment.com/analytics.js/v1/" + key + "/analytics.min.js";var r=document.getElementsByTagName("script")[0];r.parentNode.insertBefore(t,r);analytics._loadOptions=n};analytics._writeKey="dCHOwjNOqPiHlWL66BZWrcxQsCj9IPdU";;analytics.SNIPPET_VERSION="5.2.0";
-        analytics.load("dCHOwjNOqPiHlWL66BZWrcxQsCj9IPdU");
-        analytics.page("Website","Index");
-        }}();
-    </script>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Alex's Segment Test Page</title>
+    <title>Alex's Segment Pizza Flow</title>
     <link rel="icon" type="image/x-icon" href="/favicon.ico">
+    <script>
+    !function(){var i="analytics",analytics=window[i]=window[i]||[];if(!analytics.initialize)if(analytics.invoked)window.console&&console.error&&console.error("Segment snippet included twice.");else{analytics.invoked=!0;analytics.methods=["trackSubmit","trackClick","trackLink","trackForm","pageview","identify","reset","group","track","ready","alias","debug","page","screen","once","off","on","addSourceMiddleware","addIntegrationMiddleware","setAnonymousId","addDestinationMiddleware","register"];analytics.factory=function(e){return function(){if(window[i].initialized)return window[i][e].apply(window[i],arguments);var n=Array.prototype.slice.call(arguments);if(["track","screen","alias","group","page","identify"].indexOf(e)>-1){var c=document.querySelector("link[rel='canonical']");n.push({__t:"bpc",c:c&&c.getAttribute("href")||void 0,p:location.pathname,u:location.href,s:location.search,t:document.title,r:document.referrer})}n.unshift(e);analytics.push(n);return analytics}};for(var n=0;n<analytics.methods.length;n++){var key=analytics.methods[n];analytics[key]=analytics.factory(key)}analytics.load=function(key,n){var t=document.createElement("script");t.type="text/javascript";t.async=!0;t.setAttribute("data-global-segment-analytics-key",i);t.src="https://cdn.segment.com/analytics.js/v1/" + key + "/analytics.min.js";var r=document.getElementsByTagName("script")[0];r.parentNode.insertBefore(t,r);analytics._loadOptions=n};analytics._writeKey="dCHOwjNOqPiHlWL66BZWrcxQsCj9IPdU";;analytics.SNIPPET_VERSION="5.2.0";
+    analytics.load("dCHOwjNOqPiHlWL66BZWrcxQsCj9IPdU");
+    analytics.page("Home");
+    }}();
+    </script>
     <style>
         body {
             font-family: Arial, sans-serif;
             background-color: #f4f4f4;
             display: flex;
-            flex-direction: column; /* Stack vertically */
-            justify-content: center;
+            flex-direction: column;
             align-items: center;
             padding: 20px 0;
         }
-        .login-container,
-        .track-container {
+        .container {
             background: white;
             padding: 20px;
             border-radius: 8px;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-            width: 300px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+            width: 320px;
             text-align: center;
-            margin-bottom: 20px; /* spacing between the containers */
+            margin-bottom: 20px;
+            position: relative;
         }
         .logo-container {
             margin-bottom: 20px;
@@ -38,267 +37,179 @@
             max-width: 200px;
             height: auto;
         }
-        h2 {
-            text-align: center;
-            color: #333;
-            margin-top: 0;
+        h2 { margin-top: 0; color: #333; }
+        .pizza-list { display: flex; flex-wrap: wrap; justify-content: space-between; }
+        .pizza-item { width: 48%; margin-bottom: 10px; cursor: pointer; }
+        .pizza-item img { width: 100%; border-radius: 8px; }
+        .pizza-item.selected {
+            border: 2px solid #4CAF50;
+            box-shadow: 0 0 15px rgba(76,175,80,0.5);
+            transform: scale(1.05);
+            border-radius: 5%;
         }
-        .input-group {
-            margin-bottom: 15px;
-        }
-        label {
-            display: block;
-            margin-bottom: 5px;
-            color: #555;
-        }
-        input[type="text"],
-        input[type="password"],
-        input[type="email"],
-        input[type="tel"] {
-            width: 100%;
-            padding: 8px;
-            border: 1px solid #ddd;
-            border-radius: 4px;
-            box-sizing: border-box;
-        }
-        button {
-            width: 100%;
-            padding: 10px;
-            color: white;
-            border: none;
-            border-radius: 4px;
-            cursor: pointer;
-            font-size: 16px;
-            margin-bottom: 10px;
-        }
-        #loginBtn {
-            background-color: #E31837;
-        }
-        #loginBtn:hover {
-            background-color: #C2162F;
-        }
-        #addToCartBtn {
-            background-color: #2196F3;
-        }
-        #addToCartBtn:hover {
-            background-color: #0b7dda;
-        }
-        #orderCompleteBtn {
-            background-color: #ff9800;
-        }
-        #orderCompleteBtn:hover {
-            background-color: #e68a00;
-        }
-        #customizePizzaBtn {
-            background-color: #9c27b0;
-        }
-        #customizePizzaBtn:hover {
-            background-color: #7b1fa2;
-        }
-        #productViewedBtn {
-            background-color: #4CAF50;
-        }
-        #productViewedBtn:hover {
-            background-color: #3e8e41;
-        }
-        .toppings-group {
-            display: none;
-            margin: 10px 0;
-            padding: 10px;
-            background-color: #f9f9f9;
-            border-radius: 4px;
-            text-align: left;
-        }
-        .toppings-group label {
-            display: flex;
-            align-items: center;
-            margin-bottom: 8px;
-            cursor: pointer;
-        }
-        .toppings-group input[type="checkbox"] {
-            margin-right: 8px;
-        }
-        .pizza-image-container {
-            margin: 15px 0;
-            display: none;
-        }
-        .pizza-image {
-            max-width: 100%;
-            border-radius: 8px;
-            box-shadow: 0 0 5px rgba(0,0,0,0.2);
-        }
+        button { width: 100%; padding: 10px; margin: 8px 0; border: none; border-radius: 4px; cursor: pointer; color: #fff; font-size: 16px; }
+        .btn-primary { background-color: #4CAF50; }
+        .btn-secondary { background-color: #da1d40; }
+        .btn-tercenary { background-color: #7a1ba6; }
+        .btn-info { background-color: #2196F3; }
+        .btn-warning { background-color: #ff9800; }
+        .btn-reset { background-color: #777; position: fixed; bottom: 20px; right: 20px; width: auto; padding: 8px 12px; }
+        .hidden { display: none; }
+        .toppings { text-align: left; margin: 10px 0; }
+        .toppings label { display: block; margin-bottom: 5px; }
+        .input-group { margin-bottom: 10px; margin-right: 15px ;text-align: left; }
+        .input-group label { display: block; margin-bottom: 4px; color: #555; }
+        .input-group input { width: 100%; padding: 8px; border: 1px solid #ddd; border-radius: 4px; }
     </style>
 </head>
 <body>
-    <div class="login-container">
+    <div class="container">
         <div class="logo-container">
             <img src="https://images.g2crowd.com/uploads/product/image/large_detail/large_detail_205c43a22cc9f5d110bca0feac5ef444/segment.png" 
-                 alt="Domino's Pizza" class="logo" width="130" height="40">
+                 alt="Segment" class="logo" width="200" height="40">
         </div>
         <hr class="rounded">
-        <h2>Create Account</h2>
-        <form id="loginForm">
-            <div class="input-group">
-                <label for="email">Email:</label>
-                <input type="email" id="email" name="email" required>
+        <h2>Select your Pizza</h2>
+        <div class="pizza-list">
+            <div class="pizza-item" data-id="1" data-name="Pepperoni Pizza">
+                <img src="pepperoni.webp" alt="Pepperoni" width="200" height="160">
+                <p>Pepperoni</p>
             </div>
-            <div class="input-group">
-                <label for="name">Name:</label>
-                <input type="text" id="name" name="name" required>
+            <div class="pizza-item" data-id="2" data-name="Margherita Pizza">
+                <img src="margherita.jpg" alt="Margherita" width="200" height="160">
+                <p>Margherita</p>
             </div>
-            <div class="input-group">
-                <label for="phone">Phone:</label>
-                <input type="tel" id="phone" name="phone" required>
+            <div class="pizza-item" data-id="3" data-name="Veggie Pizza">
+                <img src="veggie.jpg" alt="Veggie" width="200" height="160">
+                <p>Veggie</p>
             </div>
-            <div class="input-group">
-                <label for="zipcode">Zipcode:</label>
-                <input type="text" id="zipcode" name="zipcode" required>
+            <div class="pizza-item" data-id="4" data-name="BBQ Chicken Pizza">
+                <img src="bbq_chicken.jpg" alt="BBQ Chicken" width="200" height="160">
+                <p>BBQ Chicken</p>
             </div>
-            <div>
-                <div class="input-group">
-                <input type="checkbox" id="newsletter" name="newsletter">
-                    Sign up for newsletter
-                </div>
-            </div>
-            <button type="submit" id="loginBtn">Create Account (Identify)</button>
+        </div>
+        <button id="customizeBtn" class="btn-secondary hidden">Customize Pizza</button>
+        <div id="toppingsGroup" class="toppings hidden">
+            <h3>Choose Additinal Toppings</h3>
+            <label><input type="checkbox" value="extra_cheese"> Extra Cheese (+$2.00)</label>
+            <label><input type="checkbox" value="mushrooms"> Mushrooms (+$0.80)</label>
+            <label><input type="checkbox" value="olives"> Olives (+$1.00)</label>
+            <button id="saveToppingsBtn" class="btn-primary">Save Toppings</button>
+        </div>
+        <button id="addToCartBtn" class="btn-primary hidden">Add to Cart</button>
+        <div id="accountChoice" class="hidden">
+            <button id="haveAccountBtn" class="btn-primary" style="width:48%; display:inline-block;">Sign in</button>
+            <button id="createAccountBtn" class="btn-info" style="width:48%; display:inline-block;">Create Account</button>
+        </div>
+        <form id="accountForm" class="hidden">
+            <h3 id="accountFormTitle">Create Account</h3>
+            <div class="input-group" id="nameGroup"><label>Name:</label><input type="text" id="acctName" required></div>
+            <div class="input-group"><label>Email:</label><input type="email" id="acctEmail" required></div>
+            <div class="input-group"><label>Zipcode:</label><input type="text" id="acctZip" required></div>
+            <button id="submitAccountBtn" class="btn-info">Continue</button>
         </form>
+        <button id="finishOrderBtn" class="btn-warning hidden">Create Order</button>
     </div>
 
-    <div class="track-container">
-        <h2>Other Track Events</h2>
-        <button id="productViewedBtn">Product Viewed (Page & Track)</button>
-        <div class="pizza-image-container" id="pizzaImageContainer">
-            <img src="https://swiftbr.vteximg.com.br/arquivos/618283-PIZZA-ARTESANAL-DE-CALABRESA-SWIFT_3.jpg" 
-                 alt="Cheesy Pepperoni Pizza" class="pizza-image">
-        </div>
-        <button id="customizePizzaBtn">Customize Pizza (Track)</button>
-        <div class="toppings-group" id="toppingsGroup">
-            <label>
-                <input type="checkbox" name="topping" value="pepperoni"> Pepperoni
-            </label>
-            <label>
-                <input type="checkbox" name="topping" value="mushrooms"> Mushrooms
-            </label>
-            <label>
-                <input type="checkbox" name="topping" value="extra_cheese"> Extra Cheese
-            </label>
-            <button id="saveToppingsBtn" style="background-color: #3e8e41; width: auto; padding: 5px 10px; font-size: 14px;">Save Toppings (Track)</button>
-        </div>
-        <button id="addToCartBtn">Add to Cart (Track)</button>
-        <button id="orderCompleteBtn">Create Order (Track)</button>
-    </div>
+    <button id="resetBtn" class="btn-reset">Reset</button>
 
     <script>
-        function simpleUUID() {
-            return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function(c) {
-                const r = Math.random() * 16 | 0;
-                const v = c === 'x' ? r : (r & 0x3 | 0x8);
-                return v.toString(16);
-            });
+
+        let selected = {};
+        // Utility
+        function sendTrack(event, props) { analytics.track(event, { origin:"Website", timestamp:new Date().toISOString(), ...props }); }
+        function simpleId() { return Date.now()+"-"+Math.random().toString(36).substr(2,5); }
+        function resetFlow() {
+            analytics.reset();
+            selected = {};
+            // hide all dynamic elements
+            document.getElementById('customizeBtn').classList.add('hidden');
+            document.getElementById('toppingsGroup').classList.add('hidden');
+            document.getElementById('addToCartBtn').classList.add('hidden');
+            document.getElementById('accountChoice').classList.add('hidden');
+            document.getElementById('accountForm').classList.add('hidden');
+            document.getElementById('finishOrderBtn').classList.add('hidden');
+            // clear toppings checkboxes
+            document.querySelectorAll('#toppingsGroup input[type="checkbox"]').forEach(cb => cb.checked = false);
+            // clear account form
+            document.getElementById('acctEmail').value = '';
+            document.getElementById('acctName').value = '';
+            document.getElementById('acctZip').value = '';
         }
 
-        function sendTrackEvent(buttonName, properties = {}) {
-            analytics.track(`${buttonName}`, {
-                origin: "Website",
-                timestamp: new Date().toISOString(),
-                ...properties
+        // Pizza selection
+        document.querySelectorAll('.pizza-item').forEach(el => {
+            el.addEventListener('click', () => {
+                document.querySelectorAll('.pizza-item').forEach(i => i.classList.remove('selected'));
+                el.classList.add('selected');
+                selected.id = el.dataset.id;
+                selected.name = el.dataset.name;
+                analytics.page("Product", { product_id: selected.id, product_name: selected.name });
+                sendTrack('Product Viewed', { product_id: selected.id, product_name: selected.name });
+                document.getElementById('customizeBtn').classList.remove('hidden');
+                document.getElementById('addToCartBtn').classList.remove('hidden');
+                document.getElementById('toppingsGroup').classList.add('hidden');
+                document.getElementById('accountChoice').classList.add('hidden');
+                document.getElementById('accountForm').classList.add('hidden');
+                document.getElementById('finishOrderBtn').classList.add('hidden');
             });
+        });
+        // Customize
+        document.getElementById('customizeBtn').addEventListener('click', () => {
+            analytics.page("Customize");
+            document.getElementById('addToCartBtn').classList.toggle('hidden');
+            document.getElementById('toppingsGroup').classList.toggle('hidden');
+        });
+        document.getElementById('saveToppingsBtn').addEventListener('click', () => {
+            const tops = [...document.querySelectorAll('#toppingsGroup input:checked')].map(i=>i.value);
+            selected.toppings = tops;
+            sendTrack('Customize Pizza', { toppings: tops.join(', '), toppings_count: tops.length });
+            document.getElementById('addToCartBtn').classList.remove('hidden');
+            document.getElementById('toppingsGroup').classList.add('hidden');
+        });
+        // Add to cart
+        document.getElementById('addToCartBtn').addEventListener('click', () => {
+            analytics.page("Add to Cart");
+            selected.toppings = selected.toppings?.join(', ') ?? ''
+            sendTrack('Add to Cart', { product_id:selected.id, product_name:selected.name, toppings:selected.toppings});
+            document.getElementById('accountChoice').classList.remove('hidden');
+            document.getElementById('customizeBtn').classList.add('hidden');
+            document.getElementById('addToCartBtn').classList.add('hidden');
+            document.getElementById('toppingsGroup').classList.add('hidden');
+        });
+        // Account choice
+        document.getElementById('haveAccountBtn').addEventListener('click', () => {
+            analytics.page("Sign in");
+            showAccountForm(false)}
+        );
+        document.getElementById('createAccountBtn').addEventListener('click', () => {
+            analytics.page("Sign up");
+            showAccountForm(true)
+        });
+        function showAccountForm(isCreate) {
+            document.getElementById('accountChoice').classList.add('hidden');
+            const form = document.getElementById('accountForm');
+            document.getElementById('nameGroup').style.display = isCreate ? 'block' : 'none';
+            document.getElementById('accountFormTitle').textContent = isCreate ? 'Create Account' : 'Sign in';
+            form.classList.remove('hidden');
         }
-
-        function sendIdentifyEvent(email, name, phone, zipcode) {
-            analytics.identify(`${simpleUUID()}`, {
-                origin: "Website",
-                timestamp: new Date().toISOString(),
-                email: email,
-                name: name,
-                phone: phone,
-                zipcode: zipcode
-            });
-        }
-
-        document.getElementById('loginForm').addEventListener('submit', function(e) {
+        document.getElementById('submitAccountBtn').addEventListener('click', e => {
             e.preventDefault();
-            const email = document.getElementById('email').value;
-            const name = document.getElementById('name').value;
-            const phone = document.getElementById('phone').value;
-            const zipcode = document.getElementById('zipcode').value;
-
-            sendIdentifyEvent(email, name, phone, zipcode);
-            //alert(`Login Register Identify event sent!`);
-
-            if (newsletter) {
-                sendTrackEvent('Newsletter Subscribed', {
-                    email: email,
-                    timestamp: new Date().toISOString()
-                });
-                //alert(`Newsletter Subscribed Track event sent!`);
-            }
-
-            document.getElementById('email').value = '';
-            document.getElementById('name').value = '';
-            document.getElementById('phone').value = '';
-            document.getElementById('zipcode').value = '';
+            const email = document.getElementById('acctEmail').value;
+            const name = document.getElementById('acctName')?.value;
+            const zip = document.getElementById('acctZip').value;
+            analytics.identify(simpleId(), { email, name, zipcode:zip, origin:"Website" , timestamp:new Date().toISOString() });
+            document.getElementById('accountForm').classList.add('hidden');
+            document.getElementById('finishOrderBtn').classList.remove('hidden');
         });
-
-        let selectedToppings = [];
-
-        document.getElementById('customizePizzaBtn').addEventListener('click', function() {
-            const toppingsGroup = document.getElementById('toppingsGroup');
-            toppingsGroup.style.display = toppingsGroup.style.display === 'block' ? 'none' : 'block';
+        // Finish order
+        document.getElementById('finishOrderBtn').addEventListener('click', () => {
+            analytics.page("Finish Order")
+            sendTrack('Order Placed', { product_id:selected.id, product_name:selected.name, toppings:selected.toppings});
+            alert('Order Created!');
         });
-
-        document.getElementById('saveToppingsBtn').addEventListener('click', function() {
-            selectedToppings = [];
-            document.querySelectorAll('input[name="topping"]:checked').forEach(checkbox => {
-                selectedToppings.push(checkbox.value);
-            });
-
-            sendTrackEvent('Customize Pizza', {
-                toppings: selectedToppings.join(', '),
-                toppings_count: selectedToppings.length
-            });
-
-            //alert(`Pizza customized with: ${selectedToppings.join(', ') || 'no toppings'}`);
-            document.getElementById('toppingsGroup').style.display = 'none';
-            //alert(`Customize Pizza Track event sent!`);
-        });
-
-        document.getElementById('orderCompleteBtn').addEventListener('click', function() {
-            sendTrackEvent('Order Placed', {
-                products: {
-                    product_id: 123,
-                    product_name: 'Medium Pizza',
-                    toppings: selectedToppings.join(', '),
-                    toppings_count: selectedToppings.length,
-                    product_price: 6.99
-                },
-                order_total: 6.99
-            });
-            //alert('Order Placed Track event sent with toppings!');
-        });
-
-        document.getElementById('addToCartBtn').addEventListener('click', function() {
-            sendTrackEvent('Add to Cart', {
-                product_id: 123,
-                product_name: 'Medium Pizza',
-                product_price: 6.99,
-                toppings: selectedToppings.join(', '),
-                toppings_count: selectedToppings.length
-            });
-            //alert('Add to Cart Track event event sent with toppings!');
-        });
-
-        document.getElementById('productViewedBtn').addEventListener('click', function() {
-            const pizzaImageContainer = document.getElementById('pizzaImageContainer');
-            pizzaImageContainer.style.display = 'block';
-            analytics.page('Website','Peperoni Pizza')
-            sendTrackEvent('Product Viewed', {
-                product_id: 123,
-                product_name: 'Medium Pizza'
-            });
-            //alert('Product Viewed Track event sent!');
-        });
-
+        // Reset button
+        document.getElementById('resetBtn').addEventListener('click', resetFlow);
     </script>
 </body>
 </html>
