@@ -106,7 +106,8 @@
             <div class="input-group" id="nameGroup"><label>Name:</label><input type="text" id="acctName" required></div>
             <div class="input-group"><label>Email:</label><input type="email" id="acctEmail" required></div>
             <div class="input-group"><label>Zipcode:</label><input type="text" id="acctZip" required></div>
-            <button id="submitAccountBtn" class="btn-info">Continue</button>
+            <button id="submitNewAccountBtn" class="btn-info hidden">Create Account</button>
+            <button id="submitAccountBtn" class="btn-info hidden">Continue</button>
         </form>
         <button id="finishOrderBtn" class="btn-warning hidden">Create Order</button>
     </div>
@@ -129,6 +130,8 @@
             document.getElementById('accountChoice').classList.add('hidden');
             document.getElementById('accountForm').classList.add('hidden');
             document.getElementById('finishOrderBtn').classList.add('hidden');
+            document.getElementById('submitNewAccountBtn').classList.add('hidden');
+            document.getElementById('submitAccountBtn').classList.add('hidden');
             // clear toppings checkboxes
             document.querySelectorAll('#toppingsGroup input[type="checkbox"]').forEach(cb => cb.checked = false);
             // clear account form
@@ -163,7 +166,7 @@
         document.getElementById('saveToppingsBtn').addEventListener('click', () => {
             const tops = [...document.querySelectorAll('#toppingsGroup input:checked')].map(i=>i.value);
             selected.toppings = tops;
-            sendTrack('Customize Pizza', { toppings: tops.join(', '), toppings_count: tops.length });
+            sendTrack('Customize Product', { toppings: tops.join(', '), toppings_count: tops.length });
             document.getElementById('addToCartBtn').classList.remove('hidden');
             document.getElementById('toppingsGroup').classList.add('hidden');
         });
@@ -180,10 +183,12 @@
         // Account choice
         document.getElementById('haveAccountBtn').addEventListener('click', () => {
             analytics.page("Sign in");
+            document.getElementById('submitAccountBtn').classList.remove('hidden');
             showAccountForm(false)}
         );
         document.getElementById('createAccountBtn').addEventListener('click', () => {
             analytics.page("Sign up");
+            document.getElementById('submitNewAccountBtn').classList.remove('hidden');
             showAccountForm(true)
         });
         function showAccountForm(isCreate) {
@@ -199,6 +204,16 @@
             const name = document.getElementById('acctName')?.value;
             const zip = document.getElementById('acctZip').value;
             sendTrack("Signed In")
+            analytics.identify(simpleId(), { email, name, zipcode:zip, origin:"Website" , timestamp:new Date().toISOString() });
+            document.getElementById('accountForm').classList.add('hidden');
+            document.getElementById('finishOrderBtn').classList.remove('hidden');
+        });
+        document.getElementById('submitNewAccountBtn').addEventListener('click', e => {
+            e.preventDefault();
+            const email = document.getElementById('acctEmail').value;
+            const name = document.getElementById('acctName')?.value;
+            const zip = document.getElementById('acctZip').value;
+            sendTrack("Signed Up")
             analytics.identify(simpleId(), { email, name, zipcode:zip, origin:"Website" , timestamp:new Date().toISOString() });
             document.getElementById('accountForm').classList.add('hidden');
             document.getElementById('finishOrderBtn').classList.remove('hidden');
