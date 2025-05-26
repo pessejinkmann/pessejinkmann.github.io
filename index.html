@@ -1,15 +1,19 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Alex's Segment Pizza Flow</title>
-    <link rel="icon" type="image/x-icon" href="/favicon.ico">
+    <link rel="icon" type="image/x-icon" href="/favicon.ico" />
     <script>
-    !function(){var i="analytics",analytics=window[i]=window[i]||[];if(!analytics.initialize)if(analytics.invoked)window.console&&console.error&&console.error("Segment snippet included twice.");else{analytics.invoked=!0;analytics.methods=["trackSubmit","trackClick","trackLink","trackForm","pageview","identify","reset","group","track","ready","alias","debug","page","screen","once","off","on","addSourceMiddleware","addIntegrationMiddleware","setAnonymousId","addDestinationMiddleware","register"];analytics.factory=function(e){return function(){if(window[i].initialized)return window[i][e].apply(window[i],arguments);var n=Array.prototype.slice.call(arguments);if(["track","screen","alias","group","page","identify"].indexOf(e)>-1){var c=document.querySelector("link[rel='canonical']");n.push({__t:"bpc",c:c&&c.getAttribute("href")||void 0,p:location.pathname,u:location.href,s:location.search,t:document.title,r:document.referrer})}n.unshift(e);analytics.push(n);return analytics}};for(var n=0;n<analytics.methods.length;n++){var key=analytics.methods[n];analytics[key]=analytics.factory(key)}analytics.load=function(key,n){var t=document.createElement("script");t.type="text/javascript";t.async=!0;t.setAttribute("data-global-segment-analytics-key",i);t.src="https://cdn.segment.com/analytics.js/v1/" + key + "/analytics.min.js";var r=document.getElementsByTagName("script")[0];r.parentNode.insertBefore(t,r);analytics._loadOptions=n};analytics._writeKey="dCHOwjNOqPiHlWL66BZWrcxQsCj9IPdU";;analytics.SNIPPET_VERSION="5.2.0";
-    analytics.load("dCHOwjNOqPiHlWL66BZWrcxQsCj9IPdU");
-    analytics.page("Home");
-    }}();
+        !function () {
+            var i = "analytics", analytics = window[i] = window[i] || []; if (!analytics.initialize) if (analytics.invoked) window.console && console.error && console.error("Segment snippet included twice."); else {
+                analytics.invoked = !0; analytics.methods = ["trackSubmit", "trackClick", "trackLink", "trackForm", "pageview", "identify", "reset", "group", "track", "ready", "alias", "debug", "page", "screen", "once", "off", "on", "addSourceMiddleware", "addIntegrationMiddleware", "setAnonymousId", "addDestinationMiddleware", "register"]; analytics.factory = function (e) { return function () { if (window[i].initialized) return window[i][e].apply(window[i], arguments); var n = Array.prototype.slice.call(arguments); if (["track", "screen", "alias", "group", "page", "identify"].indexOf(e) > -1) { var c = document.querySelector("link[rel='canonical']"); n.push({ __t: "bpc", c: c && c.getAttribute("href") || void 0, p: location.pathname, u: location.href, s: location.search, t: document.title, r: document.referrer }) } n.unshift(e); analytics.push(n); return analytics } }; for (var n = 0; n < analytics.methods.length; n++) { var key = analytics.methods[n]; analytics[key] = analytics.factory(key) } analytics.load = function (key, n) { var t = document.createElement("script"); t.type = "text/javascript"; t.async = !0; t.setAttribute("data-global-segment-analytics-key", i); t.src = "https://cdn.segment.com/analytics.js/v1/" + key + "/analytics.min.js"; var r = document.getElementsByTagName("script")[0]; r.parentNode.insertBefore(t, r); analytics._loadOptions = n }; analytics._writeKey = "dCHOwjNOqPiHlWL66BZWrcxQsCj9IPdU"; analytics.SNIPPET_VERSION = "5.2.0";
+                analytics.load("dCHOwjNOqPiHlWL66BZWrcxQsCj9IPdU");
+                analytics.page("Home");
+            }
+        }();
     </script>
     <style>
         body {
@@ -20,110 +24,273 @@
             align-items: center;
             padding: 20px 0;
         }
+
         .container {
             background: white;
             padding: 20px;
             border-radius: 8px;
-            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
             width: 320px;
             text-align: center;
             margin-bottom: 20px;
             position: relative;
         }
+
         .logo-container {
             margin-bottom: 20px;
         }
+
         .logo {
             max-width: 200px;
             height: auto;
         }
-        h2 { margin-top: 0; color: #333; }
-        .pizza-list { display: flex; flex-wrap: wrap; justify-content: space-between; }
-        .pizza-item { width: 48%; margin-bottom: 10px; cursor: pointer; }
-        .pizza-item img { width: 100%; border-radius: 8px; }
+
+        h2 {
+            margin-top: 0;
+            color: #333;
+        }
+
+        .pizza-list {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+        }
+
+        .pizza-item {
+            width: 48%;
+            margin-bottom: 10px;
+            cursor: pointer;
+        }
+
+        .pizza-item img {
+            width: 100%;
+            border-radius: 8px;
+        }
+
         .pizza-item.selected {
             border: 2px solid #4CAF50;
-            box-shadow: 0 0 15px rgba(76,175,80,0.5);
+            box-shadow: 0 0 15px rgba(76, 175, 80, 0.5);
             transform: scale(1.05);
             border-radius: 5%;
         }
-        button { width: 100%; padding: 10px; margin: 8px 0; border: none; border-radius: 4px; cursor: pointer; color: #fff; font-size: 16px; }
-        .btn-primary { background-color: #4CAF50; }
-        .btn-secondary { background-color: #da1d40; }
-        .btn-tercenary { background-color: #7a1ba6; }
-        .btn-info { background-color: #2196F3; }
-        .btn-warning { background-color: #ff9800; }
-        .btn-reset { background-color: #777; position: fixed; bottom: 20px; right: 20px; width: auto; padding: 8px 12px; }
-        .hidden { display: none; }
-        .toppings { text-align: left; margin: 10px 0; }
-        .toppings label { display: block; margin-bottom: 5px; }
-        .input-group { margin-bottom: 10px; margin-right: 15px ;text-align: left; }
-        .input-group label { display: block; margin-bottom: 4px; color: #555; }
-        .input-group input { width: 100%; padding: 8px; border: 1px solid #ddd; border-radius: 4px; }
+
+        button {
+            width: 100%;
+            padding: 10px;
+            margin: 8px 0;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            color: #fff;
+            font-size: 16px;
+        }
+
+        .btn-primary {
+            background-color: #4CAF50;
+        }
+
+        .btn-secondary {
+            background-color: #da1d40;
+        }
+
+        .btn-tercenary {
+            background-color: #7a1ba6;
+        }
+
+        .btn-info {
+            background-color: #2196F3;
+        }
+
+        .btn-warning {
+            background-color: #ff9800;
+        }
+
+        .btn-reset {
+            background-color: #777;
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            width: auto;
+            padding: 8px 12px;
+        }
+
+        .hidden {
+            display: none;
+        }
+
+        .toppings {
+            text-align: left;
+            margin: 10px 0;
+        }
+
+        .toppings label {
+            display: block;
+            margin-bottom: 5px;
+        }
+
+        .input-group {
+            margin-bottom: 10px;
+            margin-right: 15px;
+            text-align: left;
+        }
+
+        .input-group label {
+            display: block;
+            margin-bottom: 4px;
+            color: #555;
+        }
+
+        .input-group input {
+            width: 100%;
+            padding: 8px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+        }
+
+        #quantityControls {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 10px;
+        }
+
+        #quantityControls button {
+            width: auto;
+            padding: 6px 12px;
+            font-size: 20px;
+            color: #fff;
+            background-color: #2196F3;
+        }
+
+        #quantityDisplay {
+            min-width: 30px;
+            font-size: 18px;
+        }
     </style>
 </head>
+
 <body>
-    <div class="container">
+    <div id="pizzaContainer" class="container">
         <div class="logo-container">
-            <img src="https://images.g2crowd.com/uploads/product/image/large_detail/large_detail_205c43a22cc9f5d110bca0feac5ef444/segment.png" 
-                 alt="Segment" class="logo" width="200" height="40">
+            <img src="https://images.g2crowd.com/uploads/product/image/large_detail/large_detail_205c43a22cc9f5d110bca0feac5ef444/segment.png"
+                alt="Segment" class="logo" width="200" height="40" />
         </div>
-        <hr class="rounded">
+        <hr class="rounded" />
         <h2>Select your Pizza</h2>
         <div class="pizza-list">
-            <div class="pizza-item" data-id="1" data-name="Pepperoni Pizza">
-                <img src="pepperoni.webp" alt="Pepperoni" width="200" height="160">
+            <div class="pizza-item" data-id="1" data-name="Pepperoni Pizza" data-price="7.00" data-base-price="7.00">
+                <img src="pepperoni.webp" alt="Pepperoni" width="200" height="160" />
                 <p>Pepperoni</p>
+                <p class="price">$7.00</p>
             </div>
-            <div class="pizza-item" data-id="2" data-name="Margherita Pizza">
-                <img src="margherita.jpg" alt="Margherita" width="200" height="160">
+            <div class="pizza-item" data-id="2" data-name="Margherita Pizza" data-price="6.00" data-base-price="6.00">
+                <img src="margherita.jpg" alt="Margherita" width="200" height="160" />
                 <p>Margherita</p>
+                <p class="price">$6.00</p>
             </div>
-            <div class="pizza-item" data-id="3" data-name="Veggie Pizza">
-                <img src="veggie.jpg" alt="Veggie" width="200" height="160">
+            <div class="pizza-item" data-id="3" data-name="Veggie Pizza" data-price="8.00" data-base-price="8.00">
+                <img src="veggie.jpg" alt="Veggie" width="200" height="160" />
                 <p>Veggie</p>
+                <p class="price">$8.00</p>
             </div>
-            <div class="pizza-item" data-id="4" data-name="BBQ Chicken Pizza">
-                <img src="bbq_chicken.jpg" alt="BBQ Chicken" width="200" height="160">
+            <div class="pizza-item" data-id="4" data-name="BBQ Chicken Pizza" data-price="9.00" data-base-price="9.00">
+                <img src="bbq_chicken.jpg" alt="BBQ Chicken" width="200" height="160" />
                 <p>BBQ Chicken</p>
+                <p class="price">$9.00</p>
             </div>
         </div>
         <button id="customizeBtn" class="btn-secondary hidden">Customize Pizza</button>
+
         <div id="toppingsGroup" class="toppings hidden">
-            <h3>Choose Additinal Toppings</h3>
-            <label><input type="checkbox" value="extra_cheese"> Extra Cheese (+$2.00)</label>
-            <label><input type="checkbox" value="mushrooms"> Mushrooms (+$0.80)</label>
-            <label><input type="checkbox" value="olives"> Olives (+$1.00)</label>
+            <h3>Choose Additional Toppings</h3>
+            <label><input type="checkbox" value="extra_cheese" data-price="2.00" /> Extra Cheese (+$2.00)</label>
+            <label><input type="checkbox" value="mushrooms" data-price="0.8" /> Mushrooms (+$0.80)</label>
+            <label><input type="checkbox" value="olives" data-price="1.00" /> Olives (+$1.00)</label>
             <button id="saveToppingsBtn" class="btn-primary">Save Toppings</button>
         </div>
+
+        <div id="quantityBlock" class="hidden">
+            <div id="quantityControls">
+                <h3 style="margin: 0; font-size: 16px;">Quantity</h3>
+                <button id="decrementQty">−</button>
+                <span id="quantityDisplay">1</span>
+                <button id="incrementQty">+</button>
+            </div>
+        </div>
+
         <button id="addToCartBtn" class="btn-primary hidden">Add to Cart</button>
+
+    </div>
+
+    <div id="loginContainer" class="hidden container">
+        <h2>Delivery Information</h2>
+        <hr class="rounded" />
         <div id="accountChoice" class="hidden">
             <button id="haveAccountBtn" class="btn-primary" style="width:48%; display:inline-block;">Sign in</button>
-            <button id="createAccountBtn" class="btn-info" style="width:48%; display:inline-block;">Create Account</button>
+            <button id="createAccountBtn" class="btn-info" style="width:48%; display:inline-block;">Create
+                Account</button>
         </div>
         <form id="accountForm" class="hidden">
             <h3 id="accountFormTitle">Create Account</h3>
-            <div class="input-group" id="nameGroup"><label>Name:</label><input type="text" id="acctName" required></div>
-            <div class="input-group"><label>Email:</label><input type="email" id="acctEmail" required></div>
-            <div class="input-group"><label>Zipcode:</label><input type="text" id="acctZip" required></div>
+            <div class="input-group" id="nameGroup"><label>Name:</label><input type="text" id="acctName"
+                    placeholder="Alexandre Gouveia" required />
+            </div>
+            <div class="input-group"><label>Email:</label><input type="email" id="acctEmail"
+                    placeholder="agouveia@twilio.com" required /></div>
+            <div class="input-group"><label>Zipcode:</label><input type="text" id="acctZip" placeholder="82560400"
+                    required /></div>
             <button id="submitNewAccountBtn" class="btn-info hidden">Create Account</button>
             <button id="submitAccountBtn" class="btn-info hidden">Continue</button>
         </form>
         <button id="finishOrderBtn" class="btn-warning hidden">Create Order</button>
     </div>
 
-    <button id="resetBtn" class="btn-reset">Reset Flow & userId</button>
+
+    <div id="summaryContainer" class="container">
+        <h2>Order Summary</h2>
+        <hr class="rounded" />
+        <p>Base Price: $<span id="summaryBase">0.00</span></p>
+        <p>Toppings: $<span id="summaryToppings">0.00</span></p>
+        <p>Quantity: <span id="summaryQty">1</span></p>
+        <p>Total: $<span id="summaryTotal">0.00</span></p>
+    </div>
+
+    <button id="resetBtn" class="btn-reset">Reset Flow</button>
 
     <script>
-
         let selected = {};
-        // Utility
-        function sendTrack(event, props) { analytics.track(event, { origin:"Website", timestamp:new Date().toISOString(), ...props }); }
-        function simpleId() { return Date.now()+"-"+Math.random().toString(36).substr(2,5); }
+        let quantity = 1;
+
+        const quantityControls = document.getElementById('quantityControls');
+        const quantityDisplay = document.getElementById('quantityDisplay');
+        const incrementQty = document.getElementById('incrementQty');
+        const decrementQty = document.getElementById('decrementQty');
+
+        incrementQty.addEventListener('click', () => {
+            quantity++;
+            quantityDisplay.textContent = quantity;
+        });
+
+        decrementQty.addEventListener('click', () => {
+            if (quantity > 1) {
+                quantity--;
+                quantityDisplay.textContent = quantity;
+            }
+        });
+
+        function sendTrack(event, props) {
+            analytics.track(event, { origin: "Website", timestamp: new Date().toISOString(), ...props });
+        }
+
+        function simpleId() {
+            return Date.now() + "-" + Math.random().toString(36).substr(2, 5);
+        }
+
         function resetFlow() {
             analytics.reset();
             selected = {};
-            // hide all dynamic elements
+            quantity = 1;
+            quantityDisplay.textContent = "1";
             document.getElementById('customizeBtn').classList.add('hidden');
             document.getElementById('toppingsGroup').classList.add('hidden');
             document.getElementById('addToCartBtn').classList.add('hidden');
@@ -132,23 +299,50 @@
             document.getElementById('finishOrderBtn').classList.add('hidden');
             document.getElementById('submitNewAccountBtn').classList.add('hidden');
             document.getElementById('submitAccountBtn').classList.add('hidden');
-            // clear toppings checkboxes
+            document.getElementById('quantityBlock').classList.add('hidden');
+            document.getElementById('loginContainer').classList.add('hidden');
             document.querySelectorAll('#toppingsGroup input[type="checkbox"]').forEach(cb => cb.checked = false);
-            // clear account form
             document.getElementById('acctEmail').value = '';
             document.getElementById('acctName').value = '';
             document.getElementById('acctZip').value = '';
+            document.querySelectorAll('.pizza-item').forEach(item => {
+                item.style.pointerEvents = 'auto';
+                item.style.opacity = '1';
+                item.classList.remove('selected');
+            });
+            updateSummary();
         }
 
-        // Pizza selection
+        function updateSummary() {
+            const base = parseFloat(selected.price || 0);
+            const toppings = (selected.toppings || []).reduce((sum, t) => sum + parseFloat(t.price), 0);
+            const qty = parseInt(selected.quantity || 1);
+            selected.total_price = ((base + toppings) * qty).toFixed(2);
+
+            document.getElementById('summaryBase').textContent = base.toFixed(2);
+            document.getElementById('summaryToppings').textContent = toppings.toFixed(2);
+            document.getElementById('summaryQty').textContent = qty;
+            document.getElementById('summaryTotal').textContent = ((base + toppings) * qty).toFixed(2);
+        }
+
+        // Pizza is selected
         document.querySelectorAll('.pizza-item').forEach(el => {
             el.addEventListener('click', () => {
                 document.querySelectorAll('.pizza-item').forEach(i => i.classList.remove('selected'));
+
                 el.classList.add('selected');
                 selected.id = el.dataset.id;
                 selected.name = el.dataset.name;
-                analytics.page("Product", { product_id: selected.id, product_name: selected.name });
-                sendTrack('Product Viewed', { product_id: selected.id, product_name: selected.name });
+                selected.price = el.dataset.price;
+                updateSummary();
+
+                analytics.page("Product");
+                sendTrack('Product Viewed', { product_id: selected.id, product_name: selected.name, product_price: selected.price });
+
+                quantity = 1;
+                quantityDisplay.textContent = quantity;
+
+                document.getElementById('quantityBlock').classList.remove('hidden');
                 document.getElementById('customizeBtn').classList.remove('hidden');
                 document.getElementById('addToCartBtn').classList.remove('hidden');
                 document.getElementById('toppingsGroup').classList.add('hidden');
@@ -157,40 +351,71 @@
                 document.getElementById('finishOrderBtn').classList.add('hidden');
             });
         });
-        // Customize
+
+        // Selecting Toppings
         document.getElementById('customizeBtn').addEventListener('click', () => {
-            analytics.page("Customize");
+            analytics.page("Customize Product");
             document.getElementById('addToCartBtn').classList.toggle('hidden');
             document.getElementById('toppingsGroup').classList.toggle('hidden');
         });
+
+        // Save Toppings
         document.getElementById('saveToppingsBtn').addEventListener('click', () => {
-            const tops = [...document.querySelectorAll('#toppingsGroup input:checked')].map(i=>i.value);
-            selected.toppings = tops;
-            sendTrack('Customize Product', { toppings: tops.join(', '), toppings_count: tops.length });
+            selected.toppings = Array.from(document.querySelectorAll('#toppingsGroup input[type="checkbox"]:checked'))
+                .map(cb => ({ name: cb.value, price: cb.dataset.price }));
+            updateSummary();
+            const topping_price = (selected.toppings || []).reduce((sum, t) => sum + parseFloat(t.price), 0)
+            sendTrack('Customize Product', { toppings: selected.toppings, toppings_count: selected.toppings.length, toppings_total_price: topping_price});
             document.getElementById('addToCartBtn').classList.remove('hidden');
             document.getElementById('toppingsGroup').classList.add('hidden');
         });
-        // Add to cart
+
+        // Increasing Quantiy
+        document.getElementById('incrementQty').addEventListener('click', () => {
+            selected.quantity = (parseInt(selected.quantity || 1) + 1);
+            document.getElementById('quantityDisplay').textContent = selected.quantity;
+            updateSummary();
+        });
+
+        // Increasing Quantiy
+        document.getElementById('decrementQty').addEventListener('click', () => {
+            selected.quantity = (parseInt(selected.quantity || 1) - 1);
+            document.getElementById('quantityDisplay').textContent = selected.quantity;
+            updateSummary();
+        });
+
+        // Add to Cart
         document.getElementById('addToCartBtn').addEventListener('click', () => {
+            document.querySelectorAll('.pizza-item').forEach(item => {
+                if (!item.classList.contains('selected')) {
+                    item.style.pointerEvents = 'none';
+                    item.style.opacity = '0.5';
+                }
+            });
+
             analytics.page("Product Added");
-            selected.toppings = selected.toppings?.join(', ') ?? ''
-            sendTrack('Product Added', { product_id:selected.id, product_name:selected.name, toppings:selected.toppings});
+            sendTrack('Product Added', { product_id: selected.id, product_name: selected.name, toppings: selected.toppings, cart_quantity: quantity, cart_price: selected.total_price});
+
             document.getElementById('accountChoice').classList.remove('hidden');
+            document.getElementById('loginContainer').classList.remove('hidden');
             document.getElementById('customizeBtn').classList.add('hidden');
             document.getElementById('addToCartBtn').classList.add('hidden');
             document.getElementById('toppingsGroup').classList.add('hidden');
+            document.getElementById('quantityBlock').classList.add('hidden');
         });
-        // Account choice
+
         document.getElementById('haveAccountBtn').addEventListener('click', () => {
             analytics.page("Sign in");
             document.getElementById('submitAccountBtn').classList.remove('hidden');
-            showAccountForm(false)}
-        );
+            showAccountForm(false);
+        });
+
         document.getElementById('createAccountBtn').addEventListener('click', () => {
             analytics.page("Sign up");
             document.getElementById('submitNewAccountBtn').classList.remove('hidden');
-            showAccountForm(true)
+            showAccountForm(true);
         });
+
         function showAccountForm(isCreate) {
             document.getElementById('accountChoice').classList.add('hidden');
             const form = document.getElementById('accountForm');
@@ -198,34 +423,44 @@
             document.getElementById('accountFormTitle').textContent = isCreate ? 'Create Account' : 'Sign in';
             form.classList.remove('hidden');
         }
+
         document.getElementById('submitAccountBtn').addEventListener('click', e => {
             e.preventDefault();
             const email = document.getElementById('acctEmail').value;
             const name = document.getElementById('acctName')?.value;
             const zip = document.getElementById('acctZip').value;
-            sendTrack("Signed In")
-            analytics.identify(simpleId(), { email, name, zipcode:zip, origin:"Website" , timestamp:new Date().toISOString() });
+            selected.zipcode = zip
+            analytics.page("Signed In");
+            analytics.identify(simpleId(), { email, name, zipcode: zip, origin: "Website", timestamp: new Date().toISOString() });
             document.getElementById('accountForm').classList.add('hidden');
             document.getElementById('finishOrderBtn').classList.remove('hidden');
         });
+
         document.getElementById('submitNewAccountBtn').addEventListener('click', e => {
             e.preventDefault();
             const email = document.getElementById('acctEmail').value;
             const name = document.getElementById('acctName')?.value;
             const zip = document.getElementById('acctZip').value;
-            sendTrack("Signed Up")
-            analytics.identify(simpleId(), { email, name, zipcode:zip, origin:"Website" , timestamp:new Date().toISOString() });
+            analytics.page("Signed Up");
+            analytics.identify(simpleId(), { email, name, zipcode: zip, origin: "Website", timestamp: new Date().toISOString() });
             document.getElementById('accountForm').classList.add('hidden');
             document.getElementById('finishOrderBtn').classList.remove('hidden');
         });
-        // Finish order
+
         document.getElementById('finishOrderBtn').addEventListener('click', () => {
-            analytics.page("Order Completed")
-            sendTrack('Order Completed', { product_id:selected.id, product_name:selected.name, toppings:selected.toppings});
+            analytics.page("Order Completed");
+            const order = {
+                product_id: selected.id,
+                product_name: selected.name,
+                product_toppings: selected.toppings,
+                product_price: selected.price
+            }
+            sendTrack('Order Completed', { order_id: simpleId(), order: order, order_quantity: quantity, order_price: selected.total_price, order_zipcode: selected.zipcode});
             alert('Order Created!');
         });
-        // Reset button
+
         document.getElementById('resetBtn').addEventListener('click', resetFlow);
     </script>
 </body>
+
 </html>
