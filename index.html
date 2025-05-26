@@ -237,7 +237,9 @@
             </div>
             <div class="input-group"><label>Email:</label><input type="email" id="acctEmail"
                     placeholder="agouveia@twilio.com" required /></div>
-            <div class="input-group"><label>Zipcode:</label><input type="text" id="acctZip" placeholder="82560400"
+            <div class="input-group" id="zipcodeGroup"><label>Zipcode:</label><input type="text" id="acctZip" placeholder="82560400"
+                    required /></div>
+            <div class="input-group" id="PswdGroup"><label>Password:</label><input type="password" id="accPswd" placeholder="Password"
                     required /></div>
             <button id="submitNewAccountBtn" class="btn-info hidden">Create Account</button>
             <button id="submitAccountBtn" class="btn-info hidden">Continue</button>
@@ -246,7 +248,7 @@
     </div>
 
 
-    <div id="summaryContainer" class="container">
+    <div id="summaryContainer" class="hidden container">
         <h2>Order Summary</h2>
         <hr class="rounded" />
         <p>Base Price: $<span id="summaryBase">0.00</span></p>
@@ -342,6 +344,7 @@
                 quantity = 1;
                 quantityDisplay.textContent = quantity;
 
+                document.getElementById('summaryContainer').classList.remove('hidden');
                 document.getElementById('quantityBlock').classList.remove('hidden');
                 document.getElementById('customizeBtn').classList.remove('hidden');
                 document.getElementById('addToCartBtn').classList.remove('hidden');
@@ -404,12 +407,14 @@
             document.getElementById('quantityBlock').classList.add('hidden');
         });
 
+        // Have Account Clicked
         document.getElementById('haveAccountBtn').addEventListener('click', () => {
             analytics.page("Sign in");
             document.getElementById('submitAccountBtn').classList.remove('hidden');
             showAccountForm(false);
         });
 
+        // Create Account Clicked
         document.getElementById('createAccountBtn').addEventListener('click', () => {
             analytics.page("Sign up");
             document.getElementById('submitNewAccountBtn').classList.remove('hidden');
@@ -420,15 +425,17 @@
             document.getElementById('accountChoice').classList.add('hidden');
             const form = document.getElementById('accountForm');
             document.getElementById('nameGroup').style.display = isCreate ? 'block' : 'none';
+            document.getElementById('zipcodeGroup').style.display = isCreate ? 'block' : 'none';
             document.getElementById('accountFormTitle').textContent = isCreate ? 'Create Account' : 'Sign in';
             form.classList.remove('hidden');
         }
 
+        // Submit Account Details
         document.getElementById('submitAccountBtn').addEventListener('click', e => {
             e.preventDefault();
             const email = document.getElementById('acctEmail').value;
-            const name = document.getElementById('acctName')?.value;
-            const zip = document.getElementById('acctZip').value;
+            const name = 'Alexandre Gouveia'
+            const zip = '82560400'
             selected.zipcode = zip
             analytics.page("Signed In");
             analytics.identify(simpleId(), { email, name, zipcode: zip, origin: "Website", timestamp: new Date().toISOString() });
@@ -447,6 +454,7 @@
             document.getElementById('finishOrderBtn').classList.remove('hidden');
         });
 
+        // Finish Order
         document.getElementById('finishOrderBtn').addEventListener('click', () => {
             analytics.page("Order Completed");
             const order = {
