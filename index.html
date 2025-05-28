@@ -438,7 +438,7 @@
             const zip = '82560400'
             selected.zipcode = zip
             analytics.page("Signed In");
-            analytics.identify(simpleId(), { email, name, zipcode: zip, origin: "Website", timestamp: new Date().toISOString() });
+            analytics.identify("1748455584421-ekmxs", { email, name, zipcode: zip, origin: "Website", timestamp: new Date().toISOString() });
             document.getElementById('accountForm').classList.add('hidden');
             document.getElementById('finishOrderBtn').classList.remove('hidden');
         });
