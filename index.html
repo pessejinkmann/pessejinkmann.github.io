@@ -14,12 +14,6 @@
                 analytics.page("Home");
             }
         }();
-
-        const _fbqOrig = fbq;
-        fbq = function() {
-        console.log('[FBQ]', arguments);
-        return _fbqOrig.apply(this, arguments);
-        };
     </script>
     <style>
         body {
